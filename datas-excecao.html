@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+
+$datasNaoFecha = "07/01/2021;21/01/2021;04/02/2021;18/02/2021;04/03/2021;18/03/2021;01/04/2021;15/04/2021;06/05/2021;20/05/2021;03/06/2021;17/06/2021;01/07/2021;15/07/2021;05/08/2021;19/08/2021;02/09/2021;16/09/2021;07/10/2021;21/10/2021;04/11/2021;18/11/2021;02/12/2021;16/12/2021";
+
+$arrayDatasNaoFecha = explode(";", $datasNaoFecha); // transforma string de datas em array
+
+$mes_ini = 1;
+$dia_ini = 1;
+$ano_ini = 2021;
+
+$mes_fim = 12;
+$dia_fim = 31;
+$ano_fim = 2021;
+
+$dini = mktime(0,0,0,$mes_ini,$dia_ini,$ano_ini); // timestamp da data inicial
+$dfim = mktime(0,0,0,$mes_fim,$dia_fim,$ano_fim); // timestamp da data final
+
+while($dini <= $dfim)//enquanto uma data for inferior a outra
+{   
+   $dt = date("d/m/Y",$dini);//convertendo a data no formato dia/mes/ano
+   $diasemana = date("w", $dini);   
+	
+   if($diasemana == "4"){ // [0 Domingo] - [1 Segunda] - [2 Terca] - [3 Quarta] - [4 Quinta] - [5 Sexta] - [6 Sabado]
+   		if(!in_array($dt,$arrayDatasNaoFecha)){ // se tiver no array não pode fechar
+     		echo $dt.";"; //exibindo a data se for quinta-feira   
+        }
+   }
+   
+   $dini += 86400; // adicionando mais 1 dia (em segundos) na data inicial
+	
+}
+
+?>
+
+</body>
+</html>
